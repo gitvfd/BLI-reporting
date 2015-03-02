@@ -74,7 +74,7 @@ BLIdataWeight$variable <- c("Housing","Income","Jobs","Community","Education","E
 #plot
 averageWeights <- ggplot(BLIdataWeight,aes(x=reorder(variable,value),y=100*value))+  geom_bar(aes(colour=variable),size=.6,width=.005,stat="identity") + geom_point(aes(colour=variable),size=8) + scale_colour_manual(values=cols3,labels = c("Housing","Income","Jobs","Community","Education","Environment","Civic Engagement","Health","Life Satisfaction","Safety","Work-Life Balance"),guide=FALSE) + geom_text(data=BLIdataWeight,aes(label=round(100*value,2)),size=7,color="#7685A0",vjust=-1.3) +ggtitle("Average preferences") +theme(axis.title.x=element_blank(),axis.title.y=element_blank(), plot.title = element_text(size=24,lineheight=1,colour="#7685A0", face="bold", vjust=1),panel.background = element_rect(fill="grey97"),legend.position="top", legend.text = element_text(size = 14), legend.title=element_blank(),axis.ticks.x = element_blank(), axis.text.x = element_text(size=16, colour="#7685A0", face="bold", vjust=1), axis.text.y = element_blank(),axis.ticks.y = element_blank())  + coord_fixed(ratio=0.5)
 print(averageWeights)
-ggsave("/Users/vfduclos/Dropbox/BLI_Milano/graphics/averageWeights.pdf",width=20, height=11)
+ggsave("/Users/vfduclos/Dropbox/BLI_Milano/graphics/1_averageWeights.pdf",width=20, height=11)
 
 
 #Alternative display
@@ -88,7 +88,7 @@ BLIdataAverageWeights$Weight <- 100* (as.numeric(as.character(BLIdataAverageWeig
 
 averageWeights_alt <- ggplot(data=BLIdataAverageWeights,aes(x=reorder(Topic,Weight),y=Weight))+geom_bar(aes(fill=Topic),stat="identity",size=.6,width=.8)+scale_fill_manual(values=cols0) +ggtitle("Average preferences") + xlab('') + ylab('in percentage') + guides(fill=FALSE) + geom_text(data=BLIdataAverageWeights,aes(label=round(Weight,2)),size=7,color="white",vjust=1.2)  + theme(axis.title.x=element_blank(),axis.title.y=element_blank(), plot.title = element_text(size=24,lineheight=1,colour="#7685A0", face="bold", vjust=1),panel.background = element_rect(fill="grey97"),legend.position="top", legend.text = element_text(size = 14), legend.title=element_blank(),axis.ticks.x = element_blank(), axis.text.x = element_text(size=16, colour="#7685A0", face="bold", vjust=1), axis.text.y = element_text(size=14)) + coord_fixed(ratio=0.5)
 print(averageWeights_alt)
-ggsave("/Users/vfduclos/Dropbox/BLI_Milano/graphics/averageWeights_alt.pdf",width=20, height=11)
+ggsave("/Users/vfduclos/Dropbox/BLI_Milano/graphics/1.1_averageWeights_alt.pdf",width=20, height=11)
 
 
 
@@ -118,7 +118,7 @@ genderBullseye <- ggplot(BLIdataBullEye, aes(x = factor(1),y=count, fill=count))
 genderBullseye  <- genderBullseye  + coord_polar(theta = "y")+ coord_polar()+ggtitle(GenderTitle) +theme(axis.title.x=element_blank(),axis.title.y=element_blank(), plot.title = element_text(size=24,lineheight=1,colour="#7685A0", face="bold", vjust=1),panel.background = element_rect(fill="grey97"),axis.ticks.x = element_blank(), axis.text.x = element_text(size=16, colour="#7685A0", face="bold", vjust=1), axis.ticks.y = element_blank(),axis.text.y = element_blank()) + scale_fill_continuous(low="cadetblue1",high="coral1",guide=FALSE) 
 genderBullseye  <-genderBullseye + annotate("text", x = 1, y = 1, label = BLIdataGenderCount$count[1], size = 8, colour = "#7685A0",fontface="bold") + annotate("text", x = 1, y = 125, label = BLIdataGenderCount$count[2], size = 8, colour = "#7685A0",fontface="bold")
 print(genderBullseye)
-ggsave("/Users/vfduclos/Dropbox/BLI_Milano/graphics/genderBullseye.pdf",width=10, height=10)
+ggsave("/Users/vfduclos/Dropbox/BLI_Milano/graphics/2_genderBullseye.pdf",width=10, height=10)
 
 
 ############################################  PLOT AGE DISTRIBUTION  ############################################
@@ -128,7 +128,7 @@ BLIdataAge <-BLIdata%>%  group_by(age) %>% summarise(count=n())
 
 ageDistribution <- ggplot(BLIdata,aes(x=age))+  geom_bar(size=.6,width=.005,fill="coral1") + geom_point(data=BLIdataAge,aes(x = age,y=count),colour="coral1",size=7) +scale_x_discrete(limits=c("<15","15-24","25-34","35-44","45-54","55-64",">65")) +ggtitle("Visitors by age") +theme(axis.title.x=element_blank(),axis.title.y=element_blank(), plot.title = element_text(size=24,lineheight=1,colour="#7685A0", face="bold", vjust=1),panel.background = element_rect(fill="grey97"),legend.position="top", legend.text = element_text(size = 14), legend.title=element_blank(),axis.ticks.x = element_blank(), axis.text.x = element_text(size=16, colour="#7685A0", face="bold", vjust=1), axis.text.y = element_text(size=14)) 
 print(ageDistribution)
-ggsave("/Users/vfduclos/Dropbox/BLI_Milano/graphics/ageDistribution.PDF",width=15, height=7.5)
+ggsave("/Users/vfduclos/Dropbox/BLI_Milano/graphics/3_ageDistribution.PDF",width=15, height=7.5)
 
 
 
@@ -316,7 +316,7 @@ cols2 <- c("HousingNorm"="#3DA594","IncomeNorm"="#2CA3E0","JobsNorm"="#237FBD","
 #plot
 yearlyComparison <- ggplot(BLIdataParallelCoord, aes(group = variable, color=variable)) + geom_line(aes(Year, value),size=2,alpha=0.7) + scale_colour_manual(values=cols2,labels = c("Housing","Income","Jobs","Community","Education","Environment","Civic Engagement","Health","Life Satisfaction","Safety","Work-Life Balance")) +ggtitle("Evolution of preferences per year")  + theme(axis.title.x=element_blank(),axis.title.y=element_blank(), plot.title = element_text(size=24,lineheight=1,colour="#7685A0", face="bold", vjust=1),panel.background = element_rect(fill="grey97"),legend.position="top", legend.text = element_text(size = 14), legend.title=element_blank(),panel.grid.major.x = element_line(colour="#7685A0", size = 0.7, linetype = 2),axis.ticks.x = element_blank(), axis.text.x = element_text(size=16, colour="#7685A0", face="bold", vjust=1), axis.text.y = element_text(size=14)) + coord_fixed(ratio=25)  
 print(yearlyComparison)
-ggsave("/Users/vfduclos/Dropbox/BLI_Milano/graphics/yearlyComparison.PDF",width=20, height=10)
+ggsave("/Users/vfduclos/Dropbox/BLI_Milano/graphics/4_yearlyComparison.PDF",width=20, height=10)
 
 
 
@@ -331,7 +331,7 @@ BLIdataParallelCoord <- melt(BLIdataParallelCoord,id="gender")
 #plot
 sexComparison <- ggplot(BLIdataParallelCoord, aes(group = variable, color=variable)) + geom_line(aes(gender, value),size=2,alpha=0.7) + scale_colour_manual(values=cols2,labels = c("Housing","Income","Jobs","Community","Education","Environment","Civic Engagement","Health","Life Satisfaction","Safety","Work-Life Balance")) +ggtitle("Preferences by sex")  + theme(axis.title.x=element_blank(),axis.title.y=element_blank(), plot.title = element_text(size=24,lineheight=1,colour="#7685A0", face="bold", vjust=1),panel.background = element_rect(fill="grey97"),legend.position="top", legend.text = element_text(size = 14), legend.title=element_blank(),panel.grid.major.x = element_line(colour="#7685A0", size = 0.7, linetype = 2),axis.ticks.x = element_blank(), axis.text.x = element_text(size=16, colour="#7685A0", face="bold", vjust=1), axis.text.y = element_text(size=14)) + coord_fixed(ratio=25)  
 print(sexComparison)
-ggsave("/Users/vfduclos/Dropbox/BLI_Milano/graphics/sexComparison.PDF",width=20, height=10)
+ggsave("/Users/vfduclos/Dropbox/BLI_Milano/graphics/5_sexComparison.PDF",width=20, height=10)
 
 
 
@@ -348,7 +348,7 @@ BLIdataParallelCoord <- melt(BLIdataParallelCoord,id="age")
 #plot
 ageComparison <- ggplot(BLIdataParallelCoord, aes(group = variable, color=variable)) + geom_line(aes(age, value),size=2,alpha=0.7) + scale_colour_manual(values=cols2,labels = c("Housing","Income","Jobs","Community","Education","Environment","Civic Engagement","Health","Life Satisfaction","Safety","Work-Life Balance")) + scale_x_discrete(limits=c("<15","15-24","25-34","35-44","45-54","55-64",">65")) + ggtitle("Preferences by age range")  + theme(axis.title.x=element_blank(),axis.title.y=element_blank(), plot.title = element_text(size=24,lineheight=1,colour="#7685A0", face="bold", vjust=1),panel.background = element_rect(fill="grey97"),legend.position="top", legend.text = element_text(size = 14), legend.title=element_blank(),panel.grid.major.x = element_line(colour="#7685A0", size = 0.7, linetype = 2),axis.ticks.x = element_blank(), axis.text.x = element_text(size=16, colour="#7685A0", face="bold", vjust=1), axis.text.y = element_text(size=14))   + coord_fixed(ratio=30)  
 print(ageComparison)
-ggsave("/Users/vfduclos/Dropbox/BLI_Milano/graphics/ageComparison.PDF",width=20, height=10)
+ggsave("/Users/vfduclos/Dropbox/BLI_Milano/graphics/6_ageComparison.PDF",width=20, height=10)
 
 
 ############################################ COUNTRY COMPARISON  ############################################ 
@@ -375,9 +375,9 @@ BLIdataCouComp <- rbind(BLIdataCouComp.temp1,BLIdataCouComp.temp2)
 
 #BLIdataCouComp <- data.frame(BLIdataCouComp)
 
-countryComparison <- ggplot(BLIdataCouComp,aes(rank,CountryOrder,group=variable))+   geom_point(aes(colour=variable,size=value)) + geom_line(aes(colour=variable),linetype = 2)  + scale_size(name="Topics weight",range = c(4, 10))+ scale_colour_manual(values=cols3,guide=FALSE)  + annotate("text", x = 0, y = 1, label = country1, size = 8, colour = "#7685A0",fontface="bold") + annotate("text", x = 0, y = 2, label = country2, size = 8, colour = "#7685A0",fontface="bold") + theme(axis.title.x=element_blank(),axis.title.y=element_blank(), plot.title = element_text(size=24,lineheight=1,colour="#7685A0", face="bold", vjust=1),panel.background = element_rect(fill="grey97"),legend.position="top", legend.text = element_text(size = 14), legend.title=element_blank(),axis.ticks.x = element_blank(), axis.text.x = element_blank(), axis.text.y = element_blank(),axis.ticks.y = element_blank())+ggtitle("Comparison of country preferences")+ geom_text(data = filter(BLIdataCouComp,(country==country2) ),aes(x=rank,y=CountryOrder + 0.1, label=variable),colour="#7685A0", size = 5,angle=0) + coord_fixed(ratio=2)   
+countryComparison <- ggplot(BLIdataCouComp,aes(rank,CountryOrder,group=variable))+   geom_point(aes(colour=variable,size=value)) + geom_line(aes(colour=variable),linetype = 2)  + scale_size(name="Topics weight",range = c(4, 10))+ scale_colour_manual(values=cols3,guide=FALSE)  + annotate("text", x = 0, y = 1, label = country1, size = 8, colour = "#7685A0",fontface="bold") + annotate("text", x = 0, y = 2, label = country2, size = 8, colour = "#7685A0",fontface="bold") + theme(axis.title.x=element_blank(),axis.title.y=element_blank(), plot.title = element_text(size=24,lineheight=1,colour="#7685A0", face="bold", vjust=1),panel.background = element_rect(fill="grey97"),legend.position="bottom", legend.text = element_text(size = 14), legend.title=element_blank(),axis.ticks.x = element_blank(), axis.text.x = element_blank(), axis.text.y = element_blank(),axis.ticks.y = element_blank())+ggtitle("Comparison of country preferences")+ geom_text(data = filter(BLIdataCouComp,(country==country2) ),aes(x=rank,y=CountryOrder + 0.1, label=variable),colour="#7685A0", size = 5,angle=0) + coord_fixed(ratio=2)   
 print(countryComparison)
-ggsave("/Users/vfduclos/Dropbox/BLI_Milano/graphics/countryComparison.PDF",width=20, height=8)
+ggsave("/Users/vfduclos/Dropbox/BLI_Milano/graphics/7_countryComparison.PDF",width=20, height=8)
 
 
 
